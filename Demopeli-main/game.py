@@ -67,7 +67,7 @@ class Game:
                 self.set_location(apt)
 
             else:
-                print("************** PELIÄ EI LÖYDY! ***************")
+                print("************** GAME NOT FOUND! ***************")
 
         # read game's goals
         self.fetch_goal_info()
