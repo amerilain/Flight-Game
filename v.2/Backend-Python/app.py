@@ -12,22 +12,23 @@ from game import Game
 load_dotenv()
 
 app = Flask(__name__)
-# lisätty cors
+# added cors
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-# Tietokantayhteys
+# DB Connection
 config.conn = mysql.connector.connect(
-         host=os.environ.get('HOST'),
-         port= 3306,
-         database=os.environ.get('DB_NAME'),
-         user=os.environ.get('DB_USER'),
-         password=os.environ.get('DB_PASS'),
-         autocommit=True
-         )
+    host=os.environ.get('HOST'),
+    port=3306,
+    database=os.environ.get('DB_NAME'),
+    user=os.environ.get('DB_USER'),
+    password=os.environ.get('DB_PASS'),
+    autocommit=True
+)
+
 
 def fly(id, dest, consumption=0, player=None):
-    if id==0:
+    if id == 0:
         game = Game(0, dest, consumption, player)
     else:
         game = Game(id, dest, consumption)
@@ -59,6 +60,7 @@ def newgame():
     dest = args.get("loc")
     json_data = fly(0, dest, 0, player)
     return json_data
+
 
 if __name__ == '__main__':
     app.run(use_reloader=True, host='127.0.0.1', port=5000)
