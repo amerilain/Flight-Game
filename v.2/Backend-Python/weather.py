@@ -36,6 +36,7 @@ class Weather:
     def __init__(self, location, game):
         apikey = "860bb330bc46d74511f5ed55ff8b4cf0"
 
+
         request = "https://api.openweathermap.org/data/2.5/weather?lat=" + \
                   str(location.latitude) + "&lon=" + str(location.longitude) + "&appid=" + apikey
         answer = requests.get(request).json()
