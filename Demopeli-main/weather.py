@@ -33,20 +33,20 @@ class Weather:
         return
 
 
-    def __init__(self, sijainti, game):
+    def __init__(self, location, game):
         apikey = "860bb330bc46d74511f5ed55ff8b4cf0"
 
         request = "https://api.openweathermap.org/data/2.5/weather?lat=" + \
-                 str(sijainti.latitude) + "&lon=" + str(sijainti.longitude) + "&appid=" + apikey
-        vastaus = requests.get(request).json()
-        self.main = vastaus["weather"][0]["main"]
-        self.description = vastaus["weather"][0]["description"]
-        self.icon = "https://openweathermap.org/img/wn/" + vastaus["weather"][0]["icon"] + ".png"
-        self.temp = self.kelvin_to_celsius(vastaus["main"]["temp"])
-        self.humidity = vastaus["main"]["humidity"]
+                  str(location.latitude) + "&lon=" + str(location.longitude) + "&appid=" + apikey
+        answer = requests.get(request).json()
+        self.main = answer["weather"][0]["main"]
+        self.description = answer["weather"][0]["description"]
+        self.icon = "https://openweathermap.org/img/wn/" + answer["weather"][0]["icon"] + ".png"
+        self.temp = self.kelvin_to_celsius(answer["main"]["temp"])
+        self.humidity = answer["main"]["humidity"]
         self.wind = {
-            "speed": vastaus["wind"]["speed"],
-            "deg": vastaus["wind"]["deg"]
+            "speed": answer["wind"]["speed"],
+            "deg": answer["wind"]["deg"]
         }
 
         self.meets_goals = []
