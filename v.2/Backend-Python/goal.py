@@ -19,4 +19,3 @@ class Goal:
             self.target_text = ""
         else:
             self.target_text = target_text
-

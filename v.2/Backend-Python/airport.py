@@ -4,7 +4,7 @@ from geopy import distance
 
 
 class Airport:
-    # lisätty data, jottei tartte jokaista lentokenttää hakea erikseen
+    # added data so that you don't have to check every airport separately
     def __init__(self, ident, active=False, data=None):
         self.ident = ident
         self.active = active
@@ -28,7 +28,6 @@ class Airport:
             self.latitude = float(data['latitude'])
             self.longitude = float(data['longitude'])
 
-
     def find_nearby_airports(self):
         # print("Testing geopy...")
         # self.distanceTo(1, 2)
@@ -37,7 +36,8 @@ class Airport:
         sql = "SELECT ident, name, latitude_deg, longitude_deg FROM Airport WHERE latitude_deg BETWEEN "
         sql += str(self.latitude - config.max_lat_dist) + " AND " + str(self.latitude + config.max_lat_dist)
         sql += " AND longitude_deg BETWEEN "
-        sql += str(self.longitude - config.max_lon_dist) + " AND " + str(self.longitude + config.max_lon_dist) + " AND type = 'large_airport' ";
+        sql += str(self.longitude - config.max_lon_dist) + " AND " + str(
+            self.longitude + config.max_lon_dist) + " AND type = 'large_airport' ";
         print(sql)
         cur = config.conn.cursor()
         cur.execute(sql)
