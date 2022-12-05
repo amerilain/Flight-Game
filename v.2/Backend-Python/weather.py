@@ -7,7 +7,6 @@ class Weather:
         return int (kelvin - 273.15)
 
     def check_weather_goals(self, game):
-
         for goal in game.goals:
             if goal.target=="TEMP":
                 # temperature rule

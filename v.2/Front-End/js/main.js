@@ -42,6 +42,7 @@ function updateStatus(status) {
 
 // function to show weather at selected airport
 function showWeather(airport) {
+    // console.log(airport.weather)
     document.querySelector(
         '#airport-name').innerHTML = `Weather at ${airport.name}`;
     document.querySelector(
@@ -104,7 +105,7 @@ async function gameSetup(url) {
 
     try {
         const gameData = await getData(url);
-        console.log(gameData);
+        // console.log(gameData);
         updateStatus(gameData.status);
         if (!checkGameOver(gameData.status.co2.budget)) return;
 
@@ -127,7 +128,11 @@ async function gameSetup(url) {
                 goButton.innerHTML = 'Fly here';
                 popupContent.append(goButton);
                 const p = document.createElement('p');
-                p.innerHTML = `Distance ${airport.distance} km`;
+                // const p1 = document.createElement('p');
+
+                // console.log(showWeather(airport))
+                p.innerHTML = `Distance: ${airport.distance} km <br /> Temperature: <br /> Conditions <br /> Wind:`;
+                // p1.innerHTML = `Temperature: °C`;
                 popupContent.append(p);
                 marker.bindPopup(popupContent);
                 goButton.addEventListener('click', function () {
