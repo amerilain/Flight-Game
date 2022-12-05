@@ -197,6 +197,14 @@ main {
     margin: 0 0 1rem 0;
 }
 
+.about-header {
+    margin: auto;
+}
+
+.about-list {
+    padding-left: 2rem;
+}
+
 @media screen and (min-width: 769px) {
     .box {
         font-size: initial;

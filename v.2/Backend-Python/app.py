@@ -36,6 +36,7 @@ def fly(id, dest, consumption=0, player=None):
     nearby = game.location[0].find_nearby_airports()
     for a in nearby:
         game.location.append(a)
+    #     add property to check game finished somehwere here or game.py (fetchgoalinfo) if all goals me
     json_data = json.dumps(game, default=lambda o: o.__dict__, indent=4)
     return json_data
 
