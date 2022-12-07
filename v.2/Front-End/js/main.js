@@ -139,7 +139,7 @@ async function gameSetup(url) {
               weatherapiurl + 'lat=' + airport.latitude + '&lon=' +
               airport.longitude + '&appid=' + apikey+'&units=metric');
           console.log(weatherdata);
-          p.innerHTML = `Distance: ${airport.distance} km <br /> Temperature: ${weatherdata.main.temp} <br /> Conditions: <br /> Wind:`;
+          p.innerHTML = `Distance: ${airport.distance} km <br /> Temperature: ${weatherdata.main.temp}°C <br /> Conditions: ${weatherdata.weather[0].description}<br /> Wind: ${weatherdata.wind.speed}m/s`;
         });
         // console.log(`${apiUrl}getweather?EFHK`);
         popupContent.append(p);
