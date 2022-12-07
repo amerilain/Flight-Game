@@ -9,6 +9,7 @@ from flask_cors import CORS
 import config
 from game import Game
 
+
 load_dotenv()
 
 app = Flask(__name__)
@@ -24,7 +25,16 @@ config.conn = mysql.connector.connect(
     user=os.environ.get('DB_USER'),
     password=os.environ.get('DB_PASS'),
     autocommit=True
-)
+)\
+
+
+
+@app.route('/choose_continent')
+def continent():
+    args = request.args
+    continent = args.get("continent")
+    return continent
+
 
 
 def fly(id, dest, consumption=0, player=None):
@@ -60,7 +70,6 @@ def newgame():
     dest = args.get("loc")
     json_data = fly(0, dest, 0, player)
     return json_data
-
 
 if __name__ == '__main__':
     app.run(use_reloader=True, host='127.0.0.1', port=5000)

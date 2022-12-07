@@ -24,6 +24,13 @@ document.querySelector('#player-form').addEventListener('submit', function (evt)
     document.querySelector('#player-model').classList.add('hide');
     gameSetup(`${apiUrl}newgame?player=${playerName}&loc=${startLoc}`);
 });
+document.querySelector('#continent-form').addEventListener('submit',function (evt) {
+    evt.preventDefault()
+    var continent_chosen = document.querySelector('#continent-input').value;
+    fetch(`${apiUrl}choose_continent?continent=${continent_chosen}`)
+})
+
+
 
 // function to fetch data from API
 async function getData(url) {

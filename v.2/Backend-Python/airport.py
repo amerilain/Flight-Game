@@ -1,7 +1,13 @@
 import config
 from weather import Weather
 from geopy import distance
+from app import continent
 
+
+if continent() == '':
+    continent_chosen = 'EU'
+else:
+    continent_chosen = continent()
 
 class Airport:
     # added data so that you don't have to check every airport separately
@@ -31,9 +37,9 @@ class Airport:
     def find_nearby_airports(self):
         # print("Testing geopy...")
         # self.distanceTo(1, 2)
-        lista = []
+        list1 = []
         # haetaan kaikki tiedot kerralla
-        sql = "SELECT ident, name, latitude_deg, longitude_deg FROM Airport WHERE latitude_deg BETWEEN "
+        sql = "SELECT ident, name, latitude_deg, longitude_deg FROM Airport WHERE continent = '"+continent_chosen+"' and latitude_deg BETWEEN "
         sql += str(self.latitude - config.max_lat_dist) + " AND " + str(self.latitude + config.max_lat_dist)
         sql += " AND longitude_deg BETWEEN "
         sql += str(self.longitude - config.max_lon_dist) + " AND " + str(
@@ -51,9 +57,9 @@ class Airport:
                 nearby_apt = Airport(r[0], False, data)
                 nearby_apt.distance = self.distanceTo(nearby_apt)
                 if nearby_apt.distance <= config.max_distance:
-                    lista.append(nearby_apt)
+                    list1.append(nearby_apt)
                     nearby_apt.co2_consumption = self.co2_consumption(nearby_apt.distance)
-        return lista
+        return list1
 
     def fetchWeather(self, game):
         self.weather = Weather(self, game)
