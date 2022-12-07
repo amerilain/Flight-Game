@@ -6,14 +6,13 @@ L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
     maxZoom: 20, subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
 }).addTo(map);
 map.setView([60, 24], 2);
-
 // global variables
 const apiUrl = 'http://127.0.0.1:5000/';
 const startLoc = 'EFHK';
 const globalGoals = [];
 
 // icons
-var blueIcon = L.divIcon({className: 'blue-icon'});
+let blueIcon = L.divIcon({className: 'blue-icon'});
 const greenIcon = L.divIcon({className: 'green-icon'});
 //blueIcon.style = 'width: 6px';
 
@@ -24,11 +23,10 @@ document.querySelector('#player-form').addEventListener('submit', function (evt)
     document.querySelector('#player-model').classList.add('hide');
     gameSetup(`${apiUrl}newgame?player=${playerName}&loc=${startLoc}`);
 });
-document.querySelector('#continent-form').addEventListener('submit',function (evt) {
-    evt.preventDefault()
-    var continent_chosen = document.querySelector('#continent-input').value;
-    fetch(`${apiUrl}choose_continent?continent=${continent_chosen}`)
-})
+
+
+
+
 
 
 
@@ -116,6 +114,7 @@ async function gameSetup(url) {
         if (!checkGameOver(gameData.status.co2.budget)) return;
 
         for (let airport of gameData.location) {
+
             const marker = L.marker([airport.latitude, airport.longitude]).addTo(map);
             if (airport.active) {
                 showWeather(airport);
@@ -149,7 +148,22 @@ async function gameSetup(url) {
         console.log(error);
     }
 }
-
+// test
+/*const searchForm = document.querySelector('#continent-form');
+const input = document.querySelector('input[name=continent]');
+searchForm.addEventListener('submit', async function(evt) {
+  evt.preventDefault();
+  const continent = input.value;
+  const response = await fetch(`${apiUrl}continent/${continent}`);
+  const airport = await response.json();
+  console.log(airport);
+  // remove other markers
+  const marker = L.marker([airport.latitude_deg, airport.longitude_deg]).addTo(map);
+  marker.bindPopup(`You are here: <b>${airport.name}</b>`);
+  marker.openPopup();
+  marker.setIcon(greenIcon);
+});
+*/
 // event listener to hide goal splash
 document.querySelector('.goal').addEventListener('click', function (evt) {
     evt.currentTarget.classList.add('hide');

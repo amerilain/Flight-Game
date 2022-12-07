@@ -29,13 +29,6 @@ config.conn = mysql.connector.connect(
 
 
 
-@app.route('/choose_continent')
-def continent():
-    args = request.args
-    continent = args.get("continent")
-    return continent
-
-
 
 def fly(id, dest, consumption=0, player=None):
     if id == 0:
@@ -60,7 +53,22 @@ def flyto():
     json_data = fly(id, dest, consumption)
     print("*** Called flyto endpoint ***")
     return json_data
+# endpoint for continent
 
+
+#@app.route('/continent/<continent>')
+#def airports_by_country(continent):
+    #sql = f'''SELECT ident, name, latitude_deg, longitude_deg
+              #FROM airport
+              #WHERE continent = %s AND type ='large_airport' '''
+    #cursor = config.conn.cursor(dictionary=True)
+    #cursor.execute(sql, (continent,))
+    #result = cursor.fetchall()
+
+    #for r in result:
+        #data = r[1]
+        #print(data)
+    #return json.dumps(result)
 
 # http://127.0.0.1:5000/newgame?player=Vesa&loc=EFHK
 @app.route('/newgame')
