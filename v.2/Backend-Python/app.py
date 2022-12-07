@@ -5,6 +5,7 @@ import mysql.connector
 from dotenv import load_dotenv
 from flask import Flask, request
 from flask_cors import CORS
+import requests
 
 import config
 from game import Game
@@ -61,6 +62,22 @@ def newgame():
     dest = args.get("loc")
     json_data = fly(0, dest, 0, player)
     return json_data
+
+
+apikey = "860bb330bc46d74511f5ed55ff8b4cf0"
+
+
+@app.route('/getweather/<location>')
+def getweather(location):
+    request2 = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&appid=" + apikey
+    try:
+        response2 = requests.get(request2)
+        if response2.status_code == 200:
+            json_response2 = response2.json()
+            return json_response2
+
+    except requests.exceptions.RequestException as e:
+        print("Request could not be completed.")
 
 
 if __name__ == '__main__':
