@@ -156,29 +156,31 @@ main {
 }
 
 .goal {
-    background-image: url("../img/splatter.png");
+    background-image: url(../img/splatter.png);
     background-size: contain;
     background-repeat: no-repeat;
-    padding: 9rem 7rem;
+    padding: 11rem 6rem;
     text-align: center;
     position: absolute;
+    left: 37%;
     bottom: 30%;
     filter: drop-shadow(0 0 30px #333);
-    transform: rotate(340deg);
+    /* transform: rotate(340deg); */
     line-height: 1rem;
     z-index: 999;
 }
 
 .gameover {
-    background-image: url("../img/win.png");
+    background-image: url(../img/win.png);
     background-size: contain;
     background-repeat: no-repeat;
     padding: 9rem 7rem;
     text-align: center;
     position: absolute;
     bottom: 30%;
+    left: 37%;
     filter: drop-shadow(0 0 30px #333);
-    transform: rotate(340deg);
+    /* transform: rotate(340deg); */
     line-height: 1rem;
     z-index: 999;
 }
@@ -268,4 +270,12 @@ main {
 }
 .leaflet-marker-icon blue-icon leaflet-zoom-animated leaflet-interactive {
     width: 6px;
+}
+.dark-background {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    position: absolute;
+    top: 0;
+    z-index: 9999;
 }
