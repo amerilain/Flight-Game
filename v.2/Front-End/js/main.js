@@ -108,7 +108,7 @@ async function gameSetup(url) {
 
   try {
     const gameData = await getData(url);
-    // console.log(gameData);
+    console.log(gameData);
     updateStatus(gameData.status);
     if (!checkGameOver(gameData.status.co2.budget)) return;
 
@@ -117,6 +117,11 @@ async function gameSetup(url) {
       if (airport.active) {
         showWeather(airport);
         //check game over is true or false
+        if (gameData['gameover'] == true) {
+          alert(`Game Over.`);
+          console.log('game over');
+          return false;
+        }
         //flash image
         //return
         checkGoals(airport.weather.meets_goals);
@@ -137,7 +142,7 @@ async function gameSetup(url) {
         marker.addEventListener('click', async function() {
           const weatherdata = await getData(
               weatherapiurl + 'lat=' + airport.latitude + '&lon=' +
-              airport.longitude + '&appid=' + apikey+'&units=metric');
+              airport.longitude + '&appid=' + apikey + '&units=metric');
           console.log(weatherdata);
           p.innerHTML = `Distance: ${airport.distance} km <br /> Temperature: ${weatherdata.main.temp}°C <br /> Conditions: ${weatherdata.weather[0].description}<br /> Wind: ${weatherdata.wind.speed}m/s`;
         });

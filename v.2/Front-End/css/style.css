@@ -1,3 +1,8 @@
+/* Font */
+@font-face {
+    font-family: 'Retro_Gaming';
+    src: url("Retro Gaming.ttf") format("truetype");
+}
 /* variables */
 :root {
     --black: rgb(23,23,23);
@@ -13,9 +18,12 @@
     text-decoration: none;
     border-radius: 4px;
     text-align: center;
-    transition: all 300ms;
+    box-shadow: 0 20px 60px var(--white);
+    transition: all ease-in-out 300ms;
 }
-
+.tb-color {
+    background-color: rgba(191, 191, 191);, 1;
+}
 .button-white {
     background-color: var(--white);
     color: var(--black);
@@ -46,13 +54,15 @@
 .float {
     float: left;
 }
-
+.row {
+    margin-bottom: 10px;
+}
 
 /* app specific rules */
 html, body {
     margin: 0;
     padding: 0;
-    font-family: Verdana, Geneva, Tahoma sans-serif;
+    font-family: 'Retro_Gaming', Geneva, Tahoma sans-serif;
     background-color: var(--white);
     scroll-behavior: smooth;
 }
@@ -75,6 +85,7 @@ html, body {
 .page-title {
     margin: 0;
     text-align: center;
+    font-size: 40px;
 }
 
 ion-icon {
@@ -106,32 +117,38 @@ main {
 }
 
 #map, .box {
-    border-radius: 6px;
-    box-shadow: rgba(0, 0, 0, 0.3) 3px 3px 10px;
+    border-radius: 35px;
+    /*box-shadow: rgba(0, 0, 0, 0.3) 3px 3px 10px;*/
     margin-bottom: 1rem;
 }
 
 .box h2, .box figure {
-    margin: 0;
+    /*margin: 0;*/
     padding: 0;
+    text-align: center;
+
 }
 
 .box table{
     width: 100%;
     text-align: center;
-    border: var(--grey) solid 1px;
-    border-radius: 4px;
+    box-shadow: 0 0 80px var(--black);
+    border-radius: 35px;
 }
 
 .box li {
     width: calc(50% - 0.6rem);
     text-align: center;
-    border: var(--grey) solid 1px;
-    border-radius: 4px;
+    box-shadow: 0 20px 80px var(--black);
+    border-radius: 35px;
     box-sizing: border-box;
     padding: 0.3rem;
     margin: 0.3rem;
     overflow-wrap: break-word;
+    transition: ease-in-out 200ms;
+}
+.box li:hover {
+    transform: scale(1.1);
 }
 
 .box img {
@@ -170,6 +187,7 @@ main {
     width: 50%;
     margin: 4rem auto;
     flex-direction: column;
+    font-family: 'Retro_Gaming';
 }
 
 #player-form input {
@@ -188,9 +206,9 @@ main {
     padding: 0.3rem;
 }
 
-#weather td:first-child, #weather td:nth-child(2) {
-    border-right: var(--grey) 1px solid;
-}
+/*#weather td:first-child, #weather td:nth-child(2) {*/
+/*    border-right: var(--grey) 1px solid;*/
+/*}*/
 
 .lead-img {
     width: 100%;
