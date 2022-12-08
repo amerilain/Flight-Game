@@ -52,7 +52,7 @@ class Game:
             cur = config.conn.cursor()
             cur.execute(sql)
             res = cur.fetchall()
-            if res[0][0] >= 0:
+            if res[0][0] >= 7:
 
                 self.gameover = True
 
