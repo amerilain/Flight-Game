@@ -47,13 +47,14 @@ class Game:
             cur2.execute(sql2)
 
             # find if game over
-            # sql = "select COUNT(goalid) FROM goalreached WHERE gameid='" + id + "'"
-            # print(sql)
-            # cur = config.conn.cursor()
-            # cur.execute(sql)
-            # res = cur.fetchall()
-            # if res >= 1:
-            #     self.gameover = True
+            sql = "select COUNT(goalid) FROM goalreached WHERE gameid='" + id + "'"
+            print(sql)
+            cur = config.conn.cursor()
+            cur.execute(sql)
+            res = cur.fetchall()
+            if res[0][0] >= 0:
+
+                self.gameover = True
 
             # find game from DB
             sql = "SELECT id, co2_consumed, co2_budget, location, screen_name FROM Game WHERE id='" + id + "'"

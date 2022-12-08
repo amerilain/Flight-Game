@@ -118,7 +118,7 @@ async function gameSetup(url) {
         showWeather(airport);
         //check game over is true or false
         if (gameData['gameover'] == true) {
-          alert(`Game Over.`);
+          document.querySelector(".gameover").classList.remove('hide')
           console.log('game over');
           return false;
         }
