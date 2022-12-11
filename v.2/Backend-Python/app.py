@@ -10,6 +10,7 @@ import requests
 import config
 from game import Game
 
+
 load_dotenv()
 
 app = Flask(__name__)
@@ -25,7 +26,9 @@ config.conn = mysql.connector.connect(
     user=os.environ.get('DB_USER'),
     password=os.environ.get('DB_PASS'),
     autocommit=True
-)
+)\
+
+
 
 
 def fly(id, dest, consumption=0, player=None):
@@ -52,7 +55,22 @@ def flyto():
     json_data = fly(id, dest, consumption)
     print("*** Called flyto endpoint ***")
     return json_data
+# endpoint for continent
 
+
+#@app.route('/continent/<continent>')
+#def airports_by_country(continent):
+    #sql = f'''SELECT ident, name, latitude_deg, longitude_deg
+              #FROM airport
+              #WHERE continent = %s AND type ='large_airport' '''
+    #cursor = config.conn.cursor(dictionary=True)
+    #cursor.execute(sql, (continent,))
+    #result = cursor.fetchall()
+
+    #for r in result:
+        #data = r[1]
+        #print(data)
+    #return json.dumps(result)
 
 # http://127.0.0.1:5000/newgame?player=Vesa&loc=EFHK
 @app.route('/newgame')
@@ -64,12 +82,13 @@ def newgame():
     return json_data
 
 
+
 apikey = "860bb330bc46d74511f5ed55ff8b4cf0"
 
 
 @app.route('/getweather/<location>')
 def getweather(location):
-    request2 = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&appid=" + apikey
+    request2 = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&appid=" + apikey 
     try:
         response2 = requests.get(request2)
         if response2.status_code == 200:
