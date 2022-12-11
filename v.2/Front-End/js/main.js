@@ -6,7 +6,6 @@ L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
   maxZoom: 20, subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
 }).addTo(map);
 map.setView([60, 24], 2);
-
 // global variables
 const apiUrl = 'http://127.0.0.1:5000/';
 const startLoc = 'EFHK';
@@ -15,7 +14,7 @@ const apikey = '860bb330bc46d74511f5ed55ff8b4cf0';
 const weatherapiurl = 'https://api.openweathermap.org/data/2.5/weather?';
 
 // icons
-var blueIcon = L.divIcon({className: 'blue-icon'});
+let blueIcon = L.divIcon({className: 'blue-icon'});
 const greenIcon = L.divIcon({className: 'green-icon'});
 //blueIcon.style = 'width: 6px';
 
@@ -27,6 +26,12 @@ document.querySelector('#player-form').
       document.querySelector('#player-model').classList.add('hide');
       gameSetup(`${apiUrl}newgame?player=${playerName}&loc=${startLoc}`);
     });
+
+
+
+
+
+
 
 // function to fetch data from API
 async function getData(url) {
@@ -108,7 +113,7 @@ function checkGameOver(budget) {
 
 // function to set up game
 // this is the main function that creates the game and calls the other functions
-async function gameSetup(url) {
+async function gameSetup(url) {            
 
   try {
     const gameData = await getData(url);
@@ -127,6 +132,7 @@ async function gameSetup(url) {
           document.querySelector('.gameover').classList.remove('hide');
           // console.log('game over');
           return false;
+
         }
         //flash image
         //return
@@ -167,7 +173,22 @@ async function gameSetup(url) {
     console.log(error);
   }
 }
-
+// test
+/*const searchForm = document.querySelector('#continent-form');
+const input = document.querySelector('input[name=continent]');
+searchForm.addEventListener('submit', async function(evt) {
+  evt.preventDefault();
+  const continent = input.value;
+  const response = await fetch(`${apiUrl}continent/${continent}`);
+  const airport = await response.json();
+  console.log(airport);
+  // remove other markers
+  const marker = L.marker([airport.latitude_deg, airport.longitude_deg]).addTo(map);
+  marker.bindPopup(`You are here: <b>${airport.name}</b>`);
+  marker.openPopup();
+  marker.setIcon(greenIcon);
+});
+*/
 // event listener to hide goal splash
 document.querySelector('.goal').addEventListener('click', function(evt) {
   evt.currentTarget.classList.add('hide');
