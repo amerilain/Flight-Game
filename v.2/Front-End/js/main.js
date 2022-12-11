@@ -98,7 +98,11 @@ function updateGoals(goals) {
     document.querySelector('#goals').append(li);
   }
 }
-
+let activelayer
+let inactivelayer
+let gameID
+let currentlat
+let currentlon
 // function to check if game is over
 function checkGameOver(budget) {
   if (budget <= 0) {
@@ -110,13 +114,13 @@ function checkGameOver(budget) {
   }
   return true;
 }
-
+let gameData
 // function to set up game
 // this is the main function that creates the game and calls the other functions
 async function gameSetup(url) {            
 
   try {
-    const gameData = await getData(url);
+    gameData = await getData(url);
     console.log(gameData);
     updateStatus(gameData.status);
     if (!checkGameOver(gameData.status.co2.budget)) return;
@@ -124,6 +128,10 @@ async function gameSetup(url) {
     for (let airport of gameData.location) {
       const marker = L.marker([airport.latitude, airport.longitude]).addTo(map);
       if (airport.active) {
+        activelayer = L.layerGroup().addTo(map);
+        activelayer.addLayer(marker);
+        currentlon = airport.longitude
+        currentlat = airport.latitude
         showWeather(airport);
         //check game over is true or false
         if (gameData['gameover'] == true) {
@@ -141,6 +149,8 @@ async function gameSetup(url) {
         marker.openPopup();
         marker.setIcon(greenIcon);
       } else {
+        inactivelayer = L.layerGroup().addTo(map);
+        inactivelayer.addLayer(marker);
         marker.setIcon(blueIcon);
         const popupContent = document.createElement('div');
         const h4 = document.createElement('h4');
@@ -161,10 +171,16 @@ async function gameSetup(url) {
         // console.log(`${apiUrl}getweather?EFHK`);
         popupContent.append(p);
         marker.bindPopup(popupContent);
-        goButton.addEventListener('click', async function() {
-          gameSetup(
-              `${apiUrl}flyto?game=${gameData.status.id}&dest=${airport.ident}&consumption=${airport.co2_consumption}`);
-        });
+        goButton.addEventListener('click', async function () {
+
+          gameID = gameData.status.id
+          console.log(gameID)
+          console.log(airport.ident)
+          console.log(airport.co2_consumption)
+
+      gameSetup(
+          `${apiUrl}flyto?game=${gameID}&dest=${airport.ident}&consumption=${airport.co2_consumption}`);
+    });
 
       }
     }
@@ -174,21 +190,99 @@ async function gameSetup(url) {
   }
 }
 // test
-/*const searchForm = document.querySelector('#continent-form');
+const searchForm = document.querySelector('#continent-form');
 const input = document.querySelector('input[name=continent]');
 searchForm.addEventListener('submit', async function(evt) {
   evt.preventDefault();
   const continent = input.value;
   const response = await fetch(`${apiUrl}continent/${continent}`);
-  const airport = await response.json();
-  console.log(airport);
+  const result = await response.json();
+  console.log(result)
+  console.log(result[0].latitude_deg)
+  console.log(result[0].longitude_deg)
+  console.log(result[0].name)
+  const airports = result
   // remove other markers
-  const marker = L.marker([airport.latitude_deg, airport.longitude_deg]).addTo(map);
-  marker.bindPopup(`You are here: <b>${airport.name}</b>`);
-  marker.openPopup();
-  marker.setIcon(greenIcon);
+  map.eachLayer((layer) => {
+  layer.remove();
+  map.addLayer(activelayer)
 });
-*/
+  L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+  maxZoom: 20, subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+}).addTo(map);
+map.setView([60, 24], 2);
+for (let airport of airports) {
+  let marker = L.marker(
+      L.latLng(
+          parseFloat(airport.latitude_deg),
+          parseFloat(airport.longitude_deg)
+      )
+  );
+  marker.addTo(map);
+  if (airport.active) {
+    showWeather(airport);
+    //check game over is true or false
+    if (gameData['gameover'] == true) {
+      document.querySelector('.dark-background').classList.remove('hide');
+      document.querySelector('.goal').classList.add('hide');
+      document.querySelector('.gameover').classList.remove('hide');
+      // console.log('game over');
+      return false;
+
+    }
+
+    //flash image
+    //return
+    checkGoals(airport.weather.meets_goals);
+    marker.bindPopup(`You are here: <b>${airport.name}</b>`);
+    marker.openPopup();
+    marker.setIcon(greenIcon);
+  } else {
+    marker.setIcon(blueIcon);
+    const popupContent = document.createElement('div');
+    const h4 = document.createElement('h4');
+    h4.innerHTML = airport.name;
+    popupContent.append(h4);
+    const goButton = document.createElement('button');
+    goButton.classList.add('button');
+    goButton.innerHTML = 'Fly here';
+    popupContent.append(goButton);
+    const p = document.createElement('p');
+    marker.addEventListener('click', async function () {
+      const weatherdata = await getData(
+          weatherapiurl + 'lat=' + airport.latitude_deg + '&lon=' +
+          airport.longitude_deg + '&appid=' + apikey + '&units=metric');
+      console.log(weatherdata);
+      p.innerHTML = `Distance:  km <br /> Temperature: ${weatherdata.main.temp}°C <br /> Conditions: ${weatherdata.weather[0].description}<br /> Wind: ${weatherdata.wind.speed}m/s`;
+    });
+    // console.log(`${apiUrl}getweather?EFHK`);
+    popupContent.append(p);
+    marker.bindPopup(popupContent);
+    goButton.addEventListener('click', async function () {
+      console.log(gameID);
+      console.log(airport.ident);
+      console.log(airport.latitude_deg);
+      console.log(airport.longitude_deg);
+      console.log(currentlon)
+      console.log(currentlat);
+
+      function distance(lat1, lon1, lat2, lon2) {
+  var p = 0.017453292519943295;    // Math.PI / 180
+  var c = Math.cos;
+  var a = 0.5 - c((lat2 - lat1) * p)/2 +
+          c(lat1 * p) * c(lat2 * p) *
+          (1 - c((lon2 - lon1) * p))/2;
+
+  return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
+}let co2consumed = 50 + 1 * distance(airport.latitude_deg,airport.longitude_deg,currentlat,currentlon)
+      gameSetup(
+          `${apiUrl}flyto?game=${gameID}&dest=${airport.ident}&consumption=${co2consumed}`);
+    });
+
+  }
+}
+});
+
 // event listener to hide goal splash
 document.querySelector('.goal').addEventListener('click', function(evt) {
   evt.currentTarget.classList.add('hide');

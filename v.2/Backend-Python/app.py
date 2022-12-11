@@ -58,19 +58,16 @@ def flyto():
 # endpoint for continent
 
 
-#@app.route('/continent/<continent>')
-#def airports_by_country(continent):
-    #sql = f'''SELECT ident, name, latitude_deg, longitude_deg
-              #FROM airport
-              #WHERE continent = %s AND type ='large_airport' '''
-    #cursor = config.conn.cursor(dictionary=True)
-    #cursor.execute(sql, (continent,))
-    #result = cursor.fetchall()
-
-    #for r in result:
-        #data = r[1]
-        #print(data)
-    #return json.dumps(result)
+@app.route('/continent/<continent>')
+def airports_by_country(continent):
+    sql = f'''SELECT ident, name, latitude_deg, longitude_deg
+              FROM airport
+              WHERE continent = %s AND type ='large_airport' '''
+    cursor = config.conn.cursor(dictionary=True)
+    cursor.execute(sql, (continent,))
+    result = json.dumps(cursor.fetchall())
+    print(result)
+    return result
 
 # http://127.0.0.1:5000/newgame?player=Vesa&loc=EFHK
 @app.route('/newgame')
