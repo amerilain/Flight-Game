@@ -1,0 +1,73 @@
+<html lang="eng">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alien Weather</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap">
+</head>
+<body>
+    <section class="sub-header">
+        <nav>
+            <a href="index.html"><img src="content/img1.jpg" alt="image1"></a>
+            <div class="nav-links" id="navLinks">  
+                <i class="fa fa-close" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="about.html">CREDITS</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>   
+            <h1>About Us</h1>
+    </section>
+    
+    
+<!------- about us content -------->
+    
+<section class="about-us">
+    <div class="row">
+        <div class="about-col">
+            <br>
+
+            <h1>ALIEN WEATHER</h1>
+            <p>Developed by the members Group 1: Aleksi, Amir, Arina and Chad</p>
+            <a><img src="content/qr.jpg" alt="code"></a>
+            <a href="https://github.com/amerilain/Flight-Game" class="hero-btn red-btn">EXPLORE NOW</a>
+        </div>
+        <div class="about-col">
+
+            <video src = "content/vid.mp4" width= "470" height= "565" loop muted autoplay="autoplay">
+
+            </video>
+
+        </div>
+    </div>
+</section>
+    
+<!-------- footer ---------->
+
+<section class="footer">
+        <h4>About Us</h4>
+        <p>Developers: Aleksi, Amir, Arina and Chad</p>
+
+        <a href="https://github.com/amerilain/Flight-Game" class="footer-link"><p>made <i class="fa fa-heart-o"></i> by Group 1</p></a>
+</section>    
+  
+  
+<!----JavaScript for toggle menu---->
+<script>
+    const navLinks = document.getElementById("navLinks");
+
+    function showMenu() {
+        navLinks.style.right = "0";
+    }
+
+    function hideMenu() {
+        navLinks.style.right = "-200px";
+    }
+</script> 
+    
+</body>
+</html>    

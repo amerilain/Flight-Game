@@ -1,0 +1,105 @@
+<html lang="eng">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Group 1 Game: Alien Weather</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap">
+</head>
+<body>
+    <section class="header">
+        
+        <nav>
+            <a href="index.html"><img src="content/img1.jpg" alt="image1"></a>
+            <div class="nav-links" id="navLinks">  
+                <i class="fa fa-close" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="about.html">CREDITS</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" onclick="showMenu()"></i>
+        </nav>
+        
+        <div class="text-box">
+            <h1>ALIEN WEATHER</h1>
+            <p>You are an alien who has traveled to Earth to study the weather conditions on this yet researched planet. <br>Unfortunately, Your ship has crashed, but you still must complete your mission! <br>Now instead of your ship, you must travel as earthlings do: by plane!
+
+            <br>Flying from Airport to airport, you will observe and record strange new weather phenomena. <br>And since you posses superior intelligence and knowledge of the disastrous effects of global warming, you have a limited CO2 budget.
+                <br>Good luck, Earth Explorer! </p>
+            <a href="contact.html" class="hero-btn">Visit Us to Learn More</a>
+        </div>
+    </section>
+    
+<!---------- course ----------->
+    
+    <section class="course">
+        <h1>Easy Tutotial How to Play Our Game</h1>
+        <p><br>The purpose of the game is to reach 8 out of 8 goals from the goal table of the flight_game database.
+
+Players begin in Helsinki Vantaa airport with a CO2 budget of 10000 credits.
+
+Each "flight" will deduct CO2 from the player's budget based on the number of kilometers travelled.
+
+Players can fly to any airport in the world as long as they have enough budgeted CO2 for the trip.
+</p>
+        <div class="row">
+            <div class="course-col">
+                <h3>Step 1</h3>
+                <p> First, enter your username, so it can be saved in the database.</p>
+            </div>
+            <div class="course-col">
+                <h3>Step 2</h3>
+                <p>Then you will see a list of options and make your first move: check your current location, view goals, search by continent to show selected airports, check your CO2 budget, travel to a new airport.</p>
+            </div>
+            <div class="course-col">
+                <h3>Step 3</h3>
+                <p>When you achieve 8 out of 8 weather goals, you win the game.</p>
+            </div>
+        </div>
+    </section>
+    
+
+
+<!------ Call To Action ------>
+
+<section class="cta">
+    
+       <h1>See our<br>GitHub Page to Learn More</h1>
+        <a href="https://github.com/amerilain/Flight-Game" class="hero-btn">GITHUB GROUP 1</a>
+    
+</section>    
+ 
+<!-------- footer ---------->
+
+<section class="footer">
+        <h4>About Us</h4>
+        <p>Developers: Aleksi, Amir, Arina and Chad<br></p>
+
+        <a href="https://github.com/amerilain/Flight-Game" class="footer-link"><p>made <i class="fa fa-heart-o"></i> by Group 1</p></a>
+</section>    
+  
+  
+<!----JavaScript for toggle menu---->
+<script>
+    const navLinks = document.getElementById("navLinks");
+
+    function showMenu() {
+        navLinks.style.right = "0";
+    }
+
+    function hideMenu() {
+        navLinks.style.right = "-200px";
+    }
+</script> 
+    
+</body>
+</html>
+
+
+
+
+
+
+
