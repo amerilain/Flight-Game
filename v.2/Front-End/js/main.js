@@ -124,7 +124,7 @@ async function gameSetup(url) {
     console.log(gameData);
     updateStatus(gameData.status);
     if (!checkGameOver(gameData.status.co2.budget)) return;
-
+gameID = gameData.status.id;
     for (let airport of gameData.location) {
       const marker = L.marker([airport.latitude, airport.longitude]).addTo(map);
       if (airport.active) {
