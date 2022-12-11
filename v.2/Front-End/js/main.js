@@ -136,8 +136,8 @@ async function gameSetup(url) {
         //check game over is true or false
         if (gameData['gameover'] == true) {
           document.querySelector('.dark-background').classList.remove('hide');
-          document.querySelector('.goal').classList.add('hide');
           document.querySelector('.gameover').classList.remove('hide');
+          document.querySelector('.goal').classList.add('hide');
           // console.log('game over');
           return false;
 
