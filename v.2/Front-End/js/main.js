@@ -62,6 +62,7 @@ function checkGoals(meets_goals) {
   if (meets_goals.length > 0) {
     for (let goal of meets_goals) {
       if (!globalGoals.includes(goal)) {
+        document.querySelector(".dark-background").classList.remove('hide')
         document.querySelector('.goal').classList.remove('hide');
         location.href = '#goals';
       }
@@ -96,8 +97,7 @@ function updateGoals(goals) {
 // function to check if game is over
 function checkGameOver(budget) {
   if (budget <= 0) {
-    document.querySelector('.gameoverlose').classList.remove('hide');
-    console.log('game over');
+    alert(`Game Over.`);
     return false;
   }
   return true;
@@ -119,8 +119,10 @@ async function gameSetup(url) {
         showWeather(airport);
         //check game over is true or false
         if (gameData['gameover'] == true) {
-          document.querySelector('.gameover').classList.remove('hide');
-          console.log('game over');
+          document.querySelector(".dark-background").classList.remove('hide')
+          document.querySelector('.goal').classList.add('hide');
+          document.querySelector(".gameover").classList.remove('hide')
+          // console.log('game over');
           return false;
         }
         //flash image
@@ -165,5 +167,8 @@ async function gameSetup(url) {
 
 // event listener to hide goal splash
 document.querySelector('.goal').addEventListener('click', function(evt) {
+  evt.currentTarget.classList.add('hide');
+});
+document.querySelector('.dark-background').addEventListener('click', function(evt) {
   evt.currentTarget.classList.add('hide');
 });
