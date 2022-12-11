@@ -1,3 +1,8 @@
+/* Font */
+@font-face {
+    font-family: 'Retro_Gaming';
+    src: url("Retro Gaming.ttf") format("truetype");
+}
 /* variables */
 :root {
     --black: rgb(23,23,23);
@@ -13,9 +18,12 @@
     text-decoration: none;
     border-radius: 4px;
     text-align: center;
-    transition: all 300ms;
+    box-shadow: 0 20px 60px var(--white);
+    transition: all ease-in-out 300ms;
 }
-
+.tb-color {
+    background-color: rgba(191, 191, 191);, 1;
+}
 .button-white {
     background-color: var(--white);
     color: var(--black);
@@ -46,13 +54,15 @@
 .float {
     float: left;
 }
-
+.row {
+    margin-bottom: 10px;
+}
 
 /* app specific rules */
 html, body {
     margin: 0;
     padding: 0;
-    font-family: Verdana, Geneva, Tahoma sans-serif;
+    font-family: 'Retro_Gaming', Geneva, Tahoma sans-serif;
     background-color: var(--white);
     scroll-behavior: smooth;
 }
@@ -75,6 +85,7 @@ html, body {
 .page-title {
     margin: 0;
     text-align: center;
+    font-size: 40px;
 }
 
 ion-icon {
@@ -106,32 +117,38 @@ main {
 }
 
 #map, .box {
-    border-radius: 6px;
-    box-shadow: rgba(0, 0, 0, 0.3) 3px 3px 10px;
+    border-radius: 35px;
+    /*box-shadow: rgba(0, 0, 0, 0.3) 3px 3px 10px;*/
     margin-bottom: 1rem;
 }
 
 .box h2, .box figure {
-    margin: 0;
+    /*margin: 0;*/
     padding: 0;
+    text-align: center;
+
 }
 
 .box table{
     width: 100%;
     text-align: center;
-    border: var(--grey) solid 1px;
-    border-radius: 4px;
+    box-shadow: 0 0 80px var(--black);
+    border-radius: 35px;
 }
 
 .box li {
     width: calc(50% - 0.6rem);
     text-align: center;
-    border: var(--grey) solid 1px;
-    border-radius: 4px;
+    box-shadow: 0 20px 80px var(--black);
+    border-radius: 35px;
     box-sizing: border-box;
     padding: 0.3rem;
     margin: 0.3rem;
     overflow-wrap: break-word;
+    transition: ease-in-out 200ms;
+}
+.box li:hover {
+    transform: scale(1.1);
 }
 
 .box img {
@@ -139,15 +156,46 @@ main {
 }
 
 .goal {
-    background-image: url("../img/splatter.png");
+    background-image: url(../img/splatter.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    padding: 11rem 6rem;
+    text-align: center;
+    position: absolute;
+    left: 37%;
+    bottom: 30%;
+    filter: drop-shadow(0 0 30px #333);
+    /* transform: rotate(340deg); */
+    line-height: 1rem;
+    z-index: 999;
+}
+
+.gameover {
+    background-image: url(../img/win.png);
     background-size: contain;
     background-repeat: no-repeat;
     padding: 9rem 7rem;
     text-align: center;
     position: absolute;
     bottom: 30%;
+    left: 37%;
     filter: drop-shadow(0 0 30px #333);
-    transform: rotate(340deg);
+    /* transform: rotate(340deg); */
+    line-height: 1rem;
+    z-index: 999;
+}
+
+.gameoverlose {
+    background-image: url(../img/gameover.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    padding: 9rem 7rem;
+    text-align: center;
+    position: absolute;
+    bottom: 30%;
+    left: 37%;
+    filter: drop-shadow(0 0 30px #333);
+    /* transform: rotate(340deg); */
     line-height: 1rem;
     z-index: 999;
 }
@@ -170,6 +218,7 @@ main {
     width: 50%;
     margin: 4rem auto;
     flex-direction: column;
+    font-family: 'Retro_Gaming';
 }
 
 #player-form input {
@@ -188,13 +237,21 @@ main {
     padding: 0.3rem;
 }
 
-#weather td:first-child, #weather td:nth-child(2) {
-    border-right: var(--grey) 1px solid;
-}
+/*#weather td:first-child, #weather td:nth-child(2) {*/
+/*    border-right: var(--grey) 1px solid;*/
+/*}*/
 
 .lead-img {
     width: 100%;
     margin: 0 0 1rem 0;
+}
+
+.about-header {
+    margin: auto;
+}
+
+.about-list {
+    padding-left: 2rem;
 }
 
 @media screen and (min-width: 769px) {
@@ -228,4 +285,12 @@ main {
 }
 .leaflet-marker-icon blue-icon leaflet-zoom-animated leaflet-interactive {
     width: 6px;
+}
+.dark-background {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    position: absolute;
+    top: 0;
+    z-index: 9999;
 }

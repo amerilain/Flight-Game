@@ -3,13 +3,15 @@
 
 const map = L.map('map', {tap: false});
 L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
-    maxZoom: 20, subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+  maxZoom: 20, subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
 }).addTo(map);
 map.setView([60, 24], 2);
 // global variables
 const apiUrl = 'http://127.0.0.1:5000/';
 const startLoc = 'EFHK';
 const globalGoals = [];
+const apikey = '860bb330bc46d74511f5ed55ff8b4cf0';
+const weatherapiurl = 'https://api.openweathermap.org/data/2.5/weather?';
 
 // icons
 let blueIcon = L.divIcon({className: 'blue-icon'});
@@ -17,12 +19,13 @@ const greenIcon = L.divIcon({className: 'green-icon'});
 //blueIcon.style = 'width: 6px';
 
 // form for player name
-document.querySelector('#player-form').addEventListener('submit', function (evt) {
-    evt.preventDefault();
-    const playerName = document.querySelector('#player-input').value;
-    document.querySelector('#player-model').classList.add('hide');
-    gameSetup(`${apiUrl}newgame?player=${playerName}&loc=${startLoc}`);
-});
+document.querySelector('#player-form').
+    addEventListener('submit', function(evt) {
+      evt.preventDefault();
+      const playerName = document.querySelector('#player-input').value;
+      document.querySelector('#player-model').classList.add('hide');
+      gameSetup(`${apiUrl}newgame?player=${playerName}&loc=${startLoc}`);
+    });
 
 
 
@@ -32,121 +35,143 @@ document.querySelector('#player-form').addEventListener('submit', function (evt)
 
 // function to fetch data from API
 async function getData(url) {
-    const response = await fetch(url);
-    if (!response.ok) throw new Error('Invalid server input!');
-    const data = await response.json();
-    return data;
+  const response = await fetch(url);
+  if (!response.ok) throw new Error('Invalid server input!');
+  const data = await response.json();
+  return data;
 }
 
 // function to update game status
 function updateStatus(status) {
-    document.querySelector('#player-name').innerHTML = `Player: ${status.name}`;
-    document.querySelector('#consumed').innerHTML = status.co2.consumed;
-    document.querySelector('#budget').innerHTML = status.co2.budget;
+  document.querySelector('#player-name').innerHTML = `Player: ${status.name}`;
+  document.querySelector('#consumed').innerHTML = status.co2.consumed;
+  document.querySelector('#budget').innerHTML = status.co2.budget;
 }
 
 // function to show weather at selected airport
 function showWeather(airport) {
-    document.querySelector(
-        '#airport-name').innerHTML = `Weather at ${airport.name}`;
-    document.querySelector(
-        '#airport-temp').innerHTML = `${airport.weather.temp}°C`;
-    document.querySelector('#weather-icon').src = airport.weather.icon;
-    document.querySelector(
-        '#airport-conditions').innerHTML = airport.weather.description;
-    document.querySelector(
-        '#airport-wind').innerHTML = `${airport.weather.wind.speed}m/s`;
+  // console.log(airport.weather)
+  document.querySelector(
+      '#airport-name').innerHTML = `Weather at ${airport.name}`;
+  document.querySelector(
+      '#airport-temp').innerHTML = `${airport.weather.temp}°C`;
+  document.querySelector('#weather-icon').src = airport.weather.icon;
+  document.querySelector(
+      '#airport-conditions').innerHTML = airport.weather.description;
+  document.querySelector(
+      '#airport-wind').innerHTML = `${airport.weather.wind.speed}m/s`;
 }
 
 // function to check if any goals have been reached
 function checkGoals(meets_goals) {
-    if (meets_goals.length > 0) {
-        for (let goal of meets_goals) {
-            if (!globalGoals.includes(goal)) {
-                document.querySelector('.goal').classList.remove('hide');
-                location.href = '#goals';
-            }
-        }
-
+  if (meets_goals.length > 0) {
+    for (let goal of meets_goals) {
+      if (!globalGoals.includes(goal)) {
+        document.querySelector('.dark-background').classList.remove('hide');
+        document.querySelector('.goal').classList.remove('hide');
+        location.href = '#goals';
+      }
     }
+
+  }
 }
 
 // function to update goal data and goal table in UI
 function updateGoals(goals) {
-    document.querySelector('#goals').innerHTML = '';
-    for (let goal of goals) {
-        const li = document.createElement('li');
-        const figure = document.createElement('figure');
-        const img = document.createElement('img');
-        const figcaption = document.createElement('figcaption');
-        img.src = goal.icon;
-        img.alt = `goal name: ${goal.name}`;
-        figcaption.innerHTML = goal.description;
-        figure.append(img);
-        figure.append(figcaption);
-        li.append(figure);
-        if (goal.reached) {
-            li.classList.add('done');
-            globalGoals.includes(goal.goalid) || globalGoals.push(goal.goalid);
+  document.querySelector('#goals').innerHTML = '';
+  for (let goal of goals) {
+    const li = document.createElement('li');
+    const figure = document.createElement('figure');
+    const img = document.createElement('img');
+    const figcaption = document.createElement('figcaption');
+    img.src = goal.icon;
+    img.alt = `goal name: ${goal.name}`;
+    figcaption.innerHTML = goal.description;
+    figure.append(img);
+    figure.append(figcaption);
+    li.append(figure);
+    if (goal.reached) {
+      li.classList.add('done');
+      globalGoals.includes(goal.goalid) || globalGoals.push(goal.goalid);
 
-        }
-        document.querySelector('#goals').append(li);
     }
+    document.querySelector('#goals').append(li);
+  }
 }
 
 // function to check if game is over
 function checkGameOver(budget) {
-    if (budget <= 0) {
-        alert(`Game Over.`);
-        return false;
-    }
-    return true;
+  if (budget <= 0) {
+    document.querySelector('.dark-background').classList.remove('hide');
+    document.querySelector('.goal').classList.add('hide');
+    document.querySelector('.gameoverlose').classList.remove('hide');
+    // console.log('game over');
+    return false;
+  }
+  return true;
 }
 
 // function to set up game
 // this is the main function that creates the game and calls the other functions
-async function gameSetup(url) {
+async function gameSetup(url) {            
 
-    try {
-        const gameData = await getData(url);
-        console.log(gameData);
-        updateStatus(gameData.status);
-        if (!checkGameOver(gameData.status.co2.budget)) return;
+  try {
+    const gameData = await getData(url);
+    console.log(gameData);
+    updateStatus(gameData.status);
+    if (!checkGameOver(gameData.status.co2.budget)) return;
 
-        for (let airport of gameData.location) {
+    for (let airport of gameData.location) {
+      const marker = L.marker([airport.latitude, airport.longitude]).addTo(map);
+      if (airport.active) {
+        showWeather(airport);
+        //check game over is true or false
+        if (gameData['gameover'] == true) {
+          document.querySelector('.dark-background').classList.remove('hide');
+          document.querySelector('.goal').classList.add('hide');
+          document.querySelector('.gameover').classList.remove('hide');
+          // console.log('game over');
+          return false;
 
-            const marker = L.marker([airport.latitude, airport.longitude]).addTo(map);
-            if (airport.active) {
-                showWeather(airport);
-                checkGoals(airport.weather.meets_goals);
-                marker.bindPopup(`You are here: <b>${airport.name}</b>`);
-                marker.openPopup();
-                marker.setIcon(greenIcon);
-            } else {
-                marker.setIcon(blueIcon);
-                const popupContent = document.createElement('div');
-                const h4 = document.createElement('h4');
-                h4.innerHTML = airport.name;
-                popupContent.append(h4);
-                const goButton = document.createElement('button');
-                goButton.classList.add('button');
-                goButton.innerHTML = 'Fly here';
-                popupContent.append(goButton);
-                const p = document.createElement('p');
-                p.innerHTML = `Distance ${airport.distance} km`;
-                popupContent.append(p);
-                marker.bindPopup(popupContent);
-                goButton.addEventListener('click', function () {
-                    gameSetup(
-                        `${apiUrl}flyto?game=${gameData.status.id}&dest=${airport.ident}&consumption=${airport.co2_consumption}`);
-                });
-
-            }
         }
-        updateGoals(gameData.goals);
-    } catch (error) {
-        console.log(error);
+        //flash image
+        //return
+        checkGoals(airport.weather.meets_goals);
+        marker.bindPopup(`You are here: <b>${airport.name}</b>`);
+        marker.openPopup();
+        marker.setIcon(greenIcon);
+      } else {
+        marker.setIcon(blueIcon);
+        const popupContent = document.createElement('div');
+        const h4 = document.createElement('h4');
+        h4.innerHTML = airport.name;
+        popupContent.append(h4);
+        const goButton = document.createElement('button');
+        goButton.classList.add('button');
+        goButton.innerHTML = 'Fly here';
+        popupContent.append(goButton);
+        const p = document.createElement('p');
+        marker.addEventListener('click', async function() {
+          const weatherdata = await getData(
+              weatherapiurl + 'lat=' + airport.latitude + '&lon=' +
+              airport.longitude + '&appid=' + apikey + '&units=metric');
+          console.log(weatherdata);
+          p.innerHTML = `Distance: ${airport.distance} km <br /> Temperature: ${weatherdata.main.temp}°C <br /> Conditions: ${weatherdata.weather[0].description}<br /> Wind: ${weatherdata.wind.speed}m/s`;
+        });
+        // console.log(`${apiUrl}getweather?EFHK`);
+        popupContent.append(p);
+        marker.bindPopup(popupContent);
+        goButton.addEventListener('click', async function() {
+          gameSetup(
+              `${apiUrl}flyto?game=${gameData.status.id}&dest=${airport.ident}&consumption=${airport.co2_consumption}`);
+        });
+
+      }
     }
+    updateGoals(gameData.goals);
+  } catch (error) {
+    console.log(error);
+  }
 }
 // test
 /*const searchForm = document.querySelector('#continent-form');
@@ -165,6 +190,10 @@ searchForm.addEventListener('submit', async function(evt) {
 });
 */
 // event listener to hide goal splash
-document.querySelector('.goal').addEventListener('click', function (evt) {
-    evt.currentTarget.classList.add('hide');
+document.querySelector('.goal').addEventListener('click', function(evt) {
+  evt.currentTarget.classList.add('hide');
 });
+document.querySelector('.dark-background').
+    addEventListener('click', function(evt) {
+      evt.currentTarget.classList.add('hide');
+    });
