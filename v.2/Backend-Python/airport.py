@@ -32,7 +32,7 @@ class Airport:
         # self.distanceTo(1, 2)
         list1 = []
         # haetaan kaikki tiedot kerralla
-        sql = "SELECT ident, name, latitude_deg, longitude_deg FROM Airport WHERE '" + continent + "' and latitude_deg BETWEEN "
+        sql = "SELECT ident, name, latitude_deg, longitude_deg FROM Airport WHERE latitude_deg BETWEEN "
         sql += str(self.latitude - config.max_lat_dist) + " AND " + str(self.latitude + config.max_lat_dist)
         sql += " AND longitude_deg BETWEEN "
         sql += str(self.longitude - config.max_lon_dist) + " AND " + str(
