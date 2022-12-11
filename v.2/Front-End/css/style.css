@@ -117,9 +117,8 @@ main {
 }
 
 #map, .box {
-    border-radius: 35px;
+    /*border-radius: 35px;*/
     /*box-shadow: rgba(0, 0, 0, 0.3) 3px 3px 10px;*/
-    margin-bottom: 1rem;
 }
 
 .box h2, .box figure {
@@ -294,3 +293,42 @@ main {
     top: 0;
     z-index: 9999;
 }
+#continent-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.continent {
+    width: 15%;
+    padding: 18px;
+    margin-left: 30px;
+    margin-top: 25px;
+    border-radius: 35px;
+    box-shadow: 0 0 80px var(--black);
+    border: none;
+}
+.continent-btn {
+    padding: 0.5rem 1rem;
+    font-family: Retro_Gaming;
+    border-radius: 25px;
+    margin-left: 18px;
+    margin-top: 33px;
+    text-align: center;
+    box-shadow: 0 20px 60px var(--black);
+    transition: all ease-in-out 300ms;
+    border: none;
+    height: 50%;
+    background-color: var(--black);
+    color: var(--white);
+
+}
+.continent-btn:hover {
+    transform: scale(1.1);
+}
+::placeholder {
+    text-align: center;
+    font-family: Retro_Gaming;
+    font-size: 10px;
+    /*color: var;*/
+}
+
