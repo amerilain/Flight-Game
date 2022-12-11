@@ -96,7 +96,8 @@ function updateGoals(goals) {
 // function to check if game is over
 function checkGameOver(budget) {
   if (budget <= 0) {
-    alert(`Game Over.`);
+    document.querySelector('.gameoverlose').classList.remove('hide');
+    console.log('game over');
     return false;
   }
   return true;
@@ -118,7 +119,7 @@ async function gameSetup(url) {
         showWeather(airport);
         //check game over is true or false
         if (gameData['gameover'] == true) {
-          document.querySelector(".gameover").classList.remove('hide')
+          document.querySelector('.gameover').classList.remove('hide');
           console.log('game over');
           return false;
         }
