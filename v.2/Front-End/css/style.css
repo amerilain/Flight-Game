@@ -189,11 +189,11 @@ main {
     background-image: url(../img/gameover.png);
     background-size: contain;
     background-repeat: no-repeat;
-    padding: 9rem 7rem;
+    padding: 9rem 14rem;
     text-align: center;
     position: absolute;
-    bottom: 30%;
-    left: 37%;
+    bottom: 45%;
+    left: 38%;
     filter: drop-shadow(0 0 30px #333);
     /* transform: rotate(340deg); */
     line-height: 1rem;
