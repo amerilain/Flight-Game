@@ -1,3 +1,6 @@
+The folder v.2 contains all of the project files
+
+
 # Flight-Game
 Flight Simulator Group Project
 
