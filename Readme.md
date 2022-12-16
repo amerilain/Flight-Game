@@ -7,12 +7,12 @@
 
     This document describes the purpose and functionality of Group one's flight
     simulator game from the player’s perspective. In this document, we will describe
-    what the user can do with the game and outline our implementation goals.
+    what the user can do with the game and outline the game's goals and implementation.
     
     This document is written for two audiences: first, it is intended as a reference for our
-    group to use during project implementation and second, it is for the hypothetical
-    player to better understand the purpose of the game and how they can interact with
-    it.
+    group to use during project implementation/futre impovements and second, it is for the 
+    player to better understand the purpose of the game and how they can interact 
+    with it.
 
 ### Chapter 2:
 ###### Current State
