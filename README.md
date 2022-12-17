@@ -42,8 +42,25 @@ The folder v.2 contains all the project files
 
 ###### vision of the game - what the purpose of the game is and how it works
 
-    vision here
+    The purpose of the game is  to travel between different airports around the world,
+    each of which have randomly generated weather conditions in order to reach goals
+    from the goal table of the flight_game database.
 
+    Players begin in Helsinki Vantaa airport with a CO2 budget of fifteen thousand credits.
+    Each "flight" will deduct CO2 from the player's budget based on the number of kilometers
+    travelled (1 km equals to one CO2 point). Players can fly to any airport in the world as
+    long as they have enough budgeted CO2 for the trip.
+
+    Then, as soon as players enter the username they are presented a list of options and should
+    make their first move: check their current location, view goals, search by continent to show
+    selected airports, check their CO2 budget and travel to a new airport. 
+
+    After each flight, they are informed of their new location, the local weather conditions,
+    the goals which those conditions unlock, and are presented again with the game options.
+
+    When players achieve all the eight weather goals, they win the game.
+    
+    
 ### Chapter 4:
 
 ###### Functional requirements – what the user can do with the game and how they interact with it
