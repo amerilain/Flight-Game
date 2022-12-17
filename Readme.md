@@ -14,6 +14,9 @@
     player to better understand the purpose of the game and how they can interact 
     with it.
 
+    Here we explain the game's current state, the purpse of the game, how it works, how
+    it's played, and how the game is expected to perfom.
+
 ### Chapter 2:
 ###### Current State
 
@@ -22,7 +25,7 @@
     relational database. 
 
     The front end is implemented using HTML, CSS, and JavaScript for the
-    necessary browser functionality.
+    necessary browser functionality. 
 
     Game operation logic is implemented as a Python-based backend service that provides an API
     for the browser, handles JSON responses, utilizes the language’s object oriented 
