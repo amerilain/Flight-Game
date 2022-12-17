@@ -1,6 +1,6 @@
 # Flight-Game, Requirement Specification Document
 
-## Group One: Amir Ghari, Aleksi Merilainen, Chad McClusky, Arina Vasileva
+## Group One: Amir Ghari, Aleksi Merilainen, Chad Clusker, Arina Vasileva
 
 ### Chapter 1
 ###### Introduction:
