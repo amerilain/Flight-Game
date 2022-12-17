@@ -29,7 +29,7 @@
 
     Game operation logic is implemented as a Python-based backend service that provides an API
     for the browser, handles JSON responses, utilizes the language’s object oriented 
-    functionality and take sustainable development practices into account
+    functionality and takes sustainable development practices into account
 
     Alien Weather is appropriate for all ages, has concrete goals and provides a clear and 
     enjoyable gaming experience.
