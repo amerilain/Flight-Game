@@ -60,7 +60,8 @@ The folder v.2 contains all the project files
 
     When players achieve all the eight weather goals, they win the game.
     
-    
+    ![image](https://user-images.githubusercontent.com/111734550/208272624-4152f23a-8e73-4979-9961-2a30fe0307db.png)
+
 ### Chapter 4:
 
 ###### Functional requirements – what the user can do with the game and how they interact with it
